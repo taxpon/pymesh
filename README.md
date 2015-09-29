@@ -3,6 +3,18 @@ This library enable you to load stl file (both binary and ascii), manipulate the
 
 This library is inspired by [numpy-stl](https://github.com/WoLpH/numpy-stl).
 
+## Feature
+- Supported format
+    - STL(Binary, ASCII)
+    - OBJ(Wavefront, no material supported)
+
+- Manipulation: Support affine transform
+    - Translate
+    - Rotate
+    - Scale
+    
+- Numpy is used for inner calculation so that it runs fast.
+    
 ## Install
 ```
 pip install pymesh
@@ -12,12 +24,28 @@ pip install pymesh
 [numpy](http://www.numpy.org/) is required.
 
 ## Usage
+### Load data
 ```
+# STL
 from mesh import stl
+m = stl.Stl("sample.stl")
 
-# Load stl data
-m = stl.Stl('sample.stl')
+# OBJ
+from mesh import obj
+m = obj.Obj("sample.obj")
+```
 
+### Save data
+```
+# STL
+m.save_stl("out.stl")
+
+# OBJ
+m.save_obj("out.obj")
+```
+
+### Transform
+```
 # Translate
 m.translate_x(10)
 
@@ -26,10 +54,7 @@ m.rotate_y(30)
 
 # Scale
 m.scale(1, 2, 1)
-
-# Save
-m.save('sample_out.stl')
 ```
 
 ## LICENSE
-MIT
+[MIT License](http://takuro.mit-license.org/)
