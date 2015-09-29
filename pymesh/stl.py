@@ -105,6 +105,7 @@ class Stl(BaseMesh):
                 line = lines.pop(0)
             else:
                 raise RuntimeError(recoverable[0], 'Unable to find more lines')
+
             if not lines:
                 recoverable[0] = False
 
@@ -155,7 +156,6 @@ class Stl(BaseMesh):
                 assert get() == 'endloop'
                 assert get() == 'endfacet'
                 attrs = 0
-                print((normals, (v0, v1, v2), attrs))
                 yield (normals, (v0, v1, v2), attrs)
             except AssertionError, e:
                 raise RuntimeError(recoverable[0], e)
@@ -165,54 +165,3 @@ class Stl(BaseMesh):
                     fh.seek(-len('\n'.join(lines)), os.SEEK_CUR)
                 raise
 
-    # def save(self, filename, mode=MODE_AUTO, update_normals=True):
-    #     if update_normals:
-    #         self.update_normals()
-    #
-    #     name = os.path.split(filename)[-1]
-    #
-    #     if mode is Stl.MODE_AUTO:
-    #         if self.mode == Stl.MODE_BINARY:
-    #             save_func = self.__save_binary
-    #
-    #         elif self.mode == Stl.MODE_ASCII:
-    #             save_func = self.__save_ascii
-    #
-    #         else:
-    #             raise ValueError("Mode %r is invalid" % mode)
-    #
-    #     elif mode is Stl.MODE_BINARY:
-    #         save_func = self.__save_binary
-    #
-    #     else:
-    #         raise ValueError("Mode %r is invalid" % mode)
-    #
-    #     with open(name, 'wb') as fh:
-    #         save_func(fh, filename)
-    #
-    # def __save_binary(self, fh, name):
-    #     fh.write(("%s (%s) %s %s" % (
-    #         "{}".format(__title__),
-    #         "{}".format(__version__),
-    #         datetime.datetime.now(),
-    #         name
-    #     ))[:80].ljust(80, ' '))
-    #
-    #     bin_data = numpy.zeros(self.data.size, Stl.stl_dtype)
-    #     bin_data['normals'] = self.normals[:]
-    #     bin_data['vectors'] = self.vectors[:, :, :3]
-    #     bin_data['attr'] = self.attr
-    #     fh.write(struct.pack('i', bin_data.size))
-    #     bin_data.tofile(fh)
-    #
-    # def __save_ascii(self, fh, name):
-    #     print("solid {}".format(name), file=fh)
-    #     for i in range(len(self.vectors)):
-    #         print("facet normal %f %f %f" % tuple(self.normals[i][:3]), file=fh)
-    #         print("  outer loop", file=fh)
-    #         print("    vertex %f %f %f" % tuple(self.vectors[i][0][:3]), file=fh)
-    #         print("    vertex %f %f %f" % tuple(self.vectors[i][1][:3]), file=fh)
-    #         print("    vertex %f %f %f" % tuple(self.vectors[i][2][:3]), file=fh)
-    #         print("  endloop", file=fh)
-    #         print("endfacet", file=fh)
-    #     print("endsolid {}".format(name), file=fh)

@@ -148,6 +148,31 @@ class BaseMesh(object):
         self.normals[:] = _normals
 
     #####################################################################
+    # Analyze functions
+    #
+    def get_volume(self):
+        total_volume = 0
+        for triangle in self.vectors:
+            total_volume += BaseMesh.__calc_signed_volume(triangle)
+        return total_volume
+
+    @staticmethod
+    def __calc_signed_volume(triangle):
+        """ Calculate signed volume of given triangle
+        :param list of list triangle:
+        :rtype float
+        """
+        v321 = triangle[2][0] * triangle[1][1] * triangle[0][2]
+        v231 = triangle[1][0] * triangle[2][1] * triangle[0][2]
+        v312 = triangle[2][0] * triangle[0][1] * triangle[1][2]
+        v132 = triangle[0][0] * triangle[2][1] * triangle[1][2]
+        v213 = triangle[1][0] * triangle[0][1] * triangle[2][2]
+        v123 = triangle[0][0] * triangle[1][1] * triangle[2][2]
+
+        signed_volume = (-v321 + v231 + v312 - v132 - v213 + v123) / 6.0
+        return signed_volume
+
+    #####################################################################
     # Save functions
     #
 
