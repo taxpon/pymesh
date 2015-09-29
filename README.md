@@ -1,17 +1,16 @@
 # Python Mesh Library
-This library enable you to load stl file (both binary and ascii), manipulate the loaded data (translate, scale and rotate) and export the data in memory to stl file (both binary and ascii).
-
-This library is inspired by [numpy-stl](https://github.com/WoLpH/numpy-stl).
-
 ## Feature
 - Supported format
     - STL(Binary, ASCII)
     - OBJ(Wavefront, no material supported)
 
-- Manipulation: Support affine transform
+- Transform
     - Translate
     - Rotate
     - Scale
+    
+- Analyze
+    - Volume
     
 - Numpy is used for inner calculation so that it runs fast.
     
@@ -56,5 +55,14 @@ m.rotate_y(30)
 m.scale(1, 2, 1)
 ```
 
+### Analyze
+```
+# Volume
+m.get_volume()
+```
+
 ## LICENSE
 [MIT License](http://takuro.mit-license.org/)
+
+## MISC
+This library is inspired by [numpy-stl](https://github.com/WoLpH/numpy-stl).
