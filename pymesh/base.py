@@ -134,6 +134,24 @@ class BaseMesh(object):
         self.vectors = self.vectors.dot(mat)
         return
 
+    def join(self, another):
+        """
+
+        :param m: BaseMesh
+        :return:
+        """
+        if another is None:
+            raise AttributeError("another BaseMesh instance is required")
+
+        if not isinstance(another, BaseMesh):
+            raise TypeError("anther must be an instance of BaseMesh")
+
+        self.data = numpy.append(self.data, another.data)
+        self.normals = numpy.append(self.normals, another.normals, axis=0)
+        self.vectors = numpy.append(self.vectors, another.vectors, axis=0)
+        self.attr = numpy.append(self.attr, another.attr, axis=0)
+        return
+
     def update_normals(self):
         v0 = self.vectors[:, 0, :3]
         v1 = self.vectors[:, 1, :3]

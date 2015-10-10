@@ -9,6 +9,8 @@
     - Rotate
     - Scale
     
+- Join
+
 - Analyze
     - Volume
     
@@ -53,6 +55,13 @@ m.rotate_y(30)
 
 # Scale
 m.scale(1, 2, 1)
+```
+
+### Join
+- Combine multiple mesh data into one mesh
+```
+# Join
+m.join(another)
 ```
 
 ### Analyze
