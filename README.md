@@ -55,6 +55,9 @@ m.rotate_y(30)
 
 # Scale
 m.scale(1, 2, 1)
+
+# Method chain supported
+m.translate_x(10).rotate_y(30).scale(10)
 ```
 
 ### Join
