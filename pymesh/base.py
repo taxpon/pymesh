@@ -44,7 +44,7 @@ class BaseMesh(object):
             [0, 0, 0, 1]
         ])
         self.vectors = self.vectors.dot(mat)
-        return
+        return self
 
     def rotate_y(self, deg):
         """Rotate mesh around y-axis
@@ -59,7 +59,7 @@ class BaseMesh(object):
             [0, 0, 0, 1]
         ])
         self.vectors = self.vectors.dot(mat)
-        return
+        return self
 
     def rotate_z(self, deg):
         """Rotate mesh around z-axis
@@ -74,7 +74,7 @@ class BaseMesh(object):
             [0, 0, 0, 1]
         ])
         self.vectors = self.vectors.dot(mat)
-        return
+        return self
 
     def translate_x(self, d):
         """Translate mesh for x-direction
@@ -88,7 +88,7 @@ class BaseMesh(object):
             [d, 0, 0, 1]
         ])
         self.vectors = self.vectors.dot(mat)
-        return
+        return self
 
     def translate_y(self, d):
         """Translate mesh for y-direction
@@ -102,7 +102,7 @@ class BaseMesh(object):
             [0, d, 0, 1]
         ])
         self.vectors = self.vectors.dot(mat)
-        return
+        return self
 
     def translate_z(self, d):
         """Translate mesh for z-direction
@@ -116,7 +116,7 @@ class BaseMesh(object):
             [0, 0, d, 1]
         ])
         self.vectors = self.vectors.dot(mat)
-        return
+        return self
 
     def scale(self, sx, sy, sz):
         """Scale mesh
@@ -132,7 +132,7 @@ class BaseMesh(object):
             [0, 0, 0, 1]
         ])
         self.vectors = self.vectors.dot(mat)
-        return
+        return self
 
     def join(self, another):
         """
@@ -150,7 +150,7 @@ class BaseMesh(object):
         self.normals = numpy.append(self.normals, another.normals, axis=0)
         self.vectors = numpy.append(self.vectors, another.vectors, axis=0)
         self.attr = numpy.append(self.attr, another.attr, axis=0)
-        return
+        return self
 
     def update_normals(self):
         v0 = self.vectors[:, 0, :3]
@@ -164,6 +164,7 @@ class BaseMesh(object):
                 _normals[i] /= numpy.linalg.norm(_normals[i])
 
         self.normals[:] = _normals
+        return self
 
     #####################################################################
     # Analyze functions
