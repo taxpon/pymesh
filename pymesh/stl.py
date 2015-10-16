@@ -24,27 +24,29 @@ class Stl(BaseMesh):
         ('attr', numpy.uint16, (1, )),
     ])
 
-    def __init__(self, filename, mode=MODE_AUTO):
+    def __init__(self, filename=None, mode_policy=MODE_AUTO):
         """Craete a instance of Stl.
         :param str filename: The filename to open
-        :param int mode: The mode to open, default is :py:data:`AUTOMATIC`.
+        :param int mode_policy: The mode to open, default is :py:data:`AUTOMATIC`.
         """
         super(Stl, self).__init__()
 
-        with open(filename, "rb") as fh:
-            name, data, mode = Stl.__load(fh, mode=mode)
+        if filename is None:
+            # Create EMPTY data
+            self.name = "empty"
+            self.data = numpy.zeros(0, dtype=Stl.stl_dtype)
+            self.mode = Stl.MODE_BINARY
 
-        self.name = name
-        self.data = data
-        self.mode = mode
-        self.normals = data['normals']
-        self.vectors = numpy.ones((
-            data['vectors'].shape[0],
-            data['vectors'].shape[1],
-            data['vectors'].shape[2] + 1
-        ))
-        self.vectors[:, :, :-1] = data['vectors']
-        self.attr = data['attr']
+        else:
+            # Create data from file
+            with open(filename, "rb") as fh:
+                name, data, mode = Stl.__load(fh, mode=mode_policy)
+            self.name = name
+            self.data = data
+            self.mode = mode
+
+        super(Stl, self).set_initial_values()
+        return
 
     @staticmethod
     def __load(fh, mode=MODE_AUTO):

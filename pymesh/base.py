@@ -30,6 +30,20 @@ class BaseMesh(object):
         self.attr = []
         self.mode = MODE_STL_BINARY
 
+    def set_initial_values(self):
+        """Set initial values form existing self.data value
+        :return: None
+        """
+        self.normals = self.data['normals']
+        self.vectors = numpy.ones((
+            self.data['vectors'].shape[0],
+            self.data['vectors'].shape[1],
+            self.data['vectors'].shape[2] + 1
+        ))
+        self.vectors[:, :, :-1] = self.data['vectors']
+        self.attr = self.data['attr']
+        return
+
     def rotate_x(self, deg):
         """Rotate mesh around x-axis
 
