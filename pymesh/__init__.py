@@ -5,7 +5,7 @@
 #
 
 __title__ = "pymesh"
-__versioninfo__ = (1, 0, 1)
+__versioninfo__ = (1, 0, 2)
 __version__ = ".".join(map(str, __versioninfo__))
 __author__ = "Takuro Wada"
 __license__ = "MIT"
