@@ -45,6 +45,15 @@ m.save_stl("out.stl")
 m.save_obj("out.obj")
 ```
 
+### Create empty data
+```
+# STL
+m = stl.Stl()
+
+# OBJ
+m = obj.Obj()
+```
+
 ### Transform
 ```
 # Translate
