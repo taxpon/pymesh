@@ -159,7 +159,7 @@ class Stl(BaseMesh):
                 assert get() == 'endfacet'
                 attrs = 0
                 yield (normals, (v0, v1, v2), attrs)
-            except AssertionError, e:
+            except AssertionError as e:
                 raise RuntimeError(recoverable[0], e)
             except StopIteration:
                 if any(lines):
