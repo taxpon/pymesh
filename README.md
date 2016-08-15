@@ -83,8 +83,7 @@ m.get_volume()
 ```
 
 ### Support
-- Python2.7+
-- Currently Python3 is not supported. It will be supported in near future.
+- Python 2.7+ and Python 3 are both supported
 
 ## LICENSE
 [MIT License](http://takuro.mit-license.org/)
