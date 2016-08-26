@@ -237,8 +237,8 @@ class BaseMesh(object):
         else:
             raise ValueError("Mode %r is invalid" % mode)
 
-        with open(name, 'wb') as fh:
-            save_func(fh, filename)
+        with open(filename, 'wb') as fh:
+            save_func(fh, name)
 
     def __save_stl_binary(self, fh, name):
         fh.write(("%s (%s) %s %s" % (
