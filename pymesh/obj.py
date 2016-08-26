@@ -13,22 +13,22 @@ class Obj(BaseMesh):
         ('attr', numpy.uint16, (1, )),
     ])
 
-    def __init__(self, filename=None):
+    def __init__(self, path=None):
         """Create an instance of Obj (Wavefront)
-        :param str filename:
+        :param str path:
         """
         super(Obj, self).__init__()
 
-        if filename is None:
+        if path is None:
             # Create EMPTY data
             self.name = "empty"
             self.data = numpy.zeros(0, dtype=Obj.obj_dtype)
 
         else:
             # Create data from file
-            with open(filename, "rb") as fh:
+            with open(path, "rb") as fh:
                 data = Obj.__load(fh)
-            self.name = filename
+            self.name = path
             self.data = data
 
         super(Obj, self).set_initial_values()
