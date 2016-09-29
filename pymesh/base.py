@@ -212,7 +212,7 @@ class BaseMesh(object):
     # STL
     def save_stl(self, path, mode=MODE_STL_AUTO, update_normals=True):
         """Save data with stl format
-        :param str paht:
+        :param str path:
         :param int mode:
         :param bool update_normals:
         """
