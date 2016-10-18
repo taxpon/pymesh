@@ -210,16 +210,16 @@ class BaseMesh(object):
     #
 
     # STL
-    def save_stl(self, filename, mode=MODE_STL_AUTO, update_normals=True):
+    def save_stl(self, path, mode=MODE_STL_AUTO, update_normals=True):
         """Save data with stl format
-        :param str filename:
+        :param str path:
         :param int mode:
         :param bool update_normals:
         """
         if update_normals:
             self.update_normals()
 
-        name = os.path.split(filename)[-1]
+        filename = os.path.split(path)[-1]
 
         if mode is MODE_STL_AUTO:
             if self.mode == MODE_STL_BINARY:
@@ -237,7 +237,7 @@ class BaseMesh(object):
         else:
             raise ValueError("Mode %r is invalid" % mode)
 
-        with open(name, 'wb') as fh:
+        with open(path, 'wb') as fh:
             save_func(fh, filename)
 
     def __save_stl_binary(self, fh, name):
@@ -268,9 +268,9 @@ class BaseMesh(object):
         print("endsolid {}".format(name), file=fh)
 
     # OBJ
-    def save_obj(self, filename, update_normals=True):
+    def save_obj(self, path, update_normals=True):
         """Save data with OBJ format
-        :param stl filename:
+        :param stl path:
         :param bool update_normals:
         """
         if update_normals:
@@ -305,7 +305,7 @@ class BaseMesh(object):
             # print(normals_list)
             triangle_list.append((one_triangle, n_index + 1))
 
-        with open(filename, "wb") as fh:
+        with open(path, "wb") as fh:
             print("# {} {}".format(__title__, __version__), file=fh)
             print("# {}".format(datetime.datetime.now()), file=fh)
             print("# {}".format(__url__), file=fh)
